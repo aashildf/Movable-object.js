@@ -256,3 +256,29 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: #ff9bb5;
     text-shadow: 0 0 10px rgba(255,155,181,0.7);
 }
+
+#confetti-container{
+  position: absolute;
+     top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+    
+    .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: red; /* kan endre tilfeldig */
+    opacity: 0.9;
+    transform: rotate(45deg);
+    border-radius: 2px;
+    animation: confettiFall 1s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(400px) rotate(360deg); opacity: 0; }
+}

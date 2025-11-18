@@ -115,15 +115,37 @@ function newQuestion() {
   });
 }
 
+// MAKE CONFETTI
+function spawnConfetti() {
+    const container = document.getElementById("confetti-container");
+    const colors = ["#ff5e5e", "#ffd700", "#00ff99", "#00d4ff", "#ff66ff"];
+
+    for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.animationDuration = (0.8 + Math.random() * 0.7) + "s";
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(confetti);
+
+        confetti.addEventListener("animationend", () => confetti.remove());
+    }
+}
+
+
 // handle answers
 function handleAnswer(box) {
   const value = parseInt(box.textContent);
 
   if (value === correctAnswer) {
-    // right answer:
     score++;
     scoreDisplay.textContent = "Poeng: " + score;
     player.classList.add("celebrate");
+
+   spawnConfetti();
+
+  
     feedback.textContent = "HURRA! Riktig! ";
     feedback.className = "correct";
 
@@ -131,7 +153,7 @@ function handleAnswer(box) {
     setTimeout(() => {
       player.classList.remove("celebrate");
       feedback.textContent = "";
-      feedback.className = ""; //
+      feedback.className = ""; 
       newQuestion();
     }, 1500);
   } else {
